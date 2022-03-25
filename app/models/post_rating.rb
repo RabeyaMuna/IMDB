@@ -1,0 +1,2 @@
+class PostRating < ApplicationRecord
+end
