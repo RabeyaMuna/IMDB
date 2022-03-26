@@ -3,10 +3,13 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :post_ratings, dependent: :destroy
+  has_many :post_reports, dependent: :destroy
   has_many :cast_crews, dependent: :destroy
 
   has_many_attached :images, dependent: :destroy
   has_many_attached :videos, dependent: :destroy
+
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
   accepts_nested_attributes_for :cast_crews, allow_destroy: true, reject_if: :all_blank
 

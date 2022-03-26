@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.citext :name, index: true, null: false
       t.citext :email, index: { unique: true }, null: false
       t.string :password, null: false
-      # t.string :phone, index: { unique: true }, limit: 18, null: false
       t.integer :role, index: true, default: 2, null: false
 
       t.timestamps

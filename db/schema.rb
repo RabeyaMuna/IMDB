@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_26_064956) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_26_155226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -72,6 +72,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_064956) do
     t.index ["user_id"], name: "index_post_ratings_on_user_id"
   end
 
+  create_table "post_reports", force: :cascade do |t|
+    t.text "message"
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_reports_on_post_id"
+    t.index ["user_id"], name: "index_post_reports_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.citext "name", null: false
     t.integer "category", default: 1, null: false
@@ -79,10 +89,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_064956) do
     t.text "description"
     t.string "link"
     t.string "release_date", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_posts_on_category"
     t.index ["name"], name: "index_posts_on_name"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -115,6 +127,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_064956) do
   add_foreign_key "comments", "users"
   add_foreign_key "post_ratings", "posts"
   add_foreign_key "post_ratings", "users"
+  add_foreign_key "post_reports", "posts"
+  add_foreign_key "post_reports", "users"
+  add_foreign_key "posts", "users"
   add_foreign_key "reports", "comments"
   add_foreign_key "reports", "users"
 end

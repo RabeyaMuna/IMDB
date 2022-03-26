@@ -1,0 +1,2 @@
+class PostRatingsController < ApplicationController
+end
