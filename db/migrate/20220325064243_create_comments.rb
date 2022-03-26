@@ -1,13 +1,12 @@
 class CreateComments < ActiveRecord::Migration[7.0]
   def up
     create_table :comments do |t|
-      t.integer :post_id, null: false, index: true
-      t.integer :user_id, null: false, index: true
       t.text :comment
+      t.references :post, foreign_key: true, null: false, index: true
+      t.references :user, foreign_key: true, null: false, index: true
 
       t.timestamps
     end
-    add_index :comments, %i[post_id user_id], unique: true
   end
 
   def down
