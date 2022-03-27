@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   include ContentType
 
+  has_one_attached :poster
   has_many :comments, dependent: :destroy
-  has_many :post_ratings, dependent: :destroy
+  has_many :post_ratings, through: :users
   has_many :post_reports, dependent: :destroy
   has_many :cast_crews, dependent: :destroy
 
@@ -17,7 +18,7 @@ class Post < ApplicationRecord
   enum category: CATEGORY
 
   validates :name, :release_date, :category, presence: true
-  validates :images,
+  validates :images, :poster,
             content_type: IMAGE_TYPE,
             size: { less_than_or_equal_to: 5.megabytes, message: 'must be within 5MB in size' }
 

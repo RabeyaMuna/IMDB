@@ -9,13 +9,13 @@
           <%= link_to 'Home', root_path, class: "nav-link" %>
         </h4>
         <h4 class="nav-item">
-          <%= link_to 'Movies', posts_path, class: "nav-link" %>
+          <%= link_to 'Movies', posts_path(category: :movie), class: "nav-link" %>
         </h4>
         <h4 class="nav-item">
-          <%= link_to 'Short Films', posts_path, class: "nav-link" %>
+          <%= link_to 'Music Videos', posts_path('music_video'), class: "nav-link" %>
         </h4>
         <h4 class="nav-item">
-          <%= link_to 'Music Videos', posts_path, class: "nav-link" %>
+          <%= link_to 'Short Films', posts_path('short_film'), class: "nav-link" %>
         </h4>
         <h4 class="nav-item">
         </h4>
@@ -25,14 +25,10 @@
       </div>
 
       <% if signed_in? %>
-        <%= link_to 'Sign Out',
-                    sign_out_path,
-                    method: :delete,
-                    class: "btn btn-primary btn-lg",
-                    data: { confirm: t('notice.logout.confirmation') } %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-lg" %>
       <% else %>
-        <%= link_to 'Sign Up', sign_up_path, class: "btn btn-primary btn-lg" %>
-        <%= link_to 'Sign In', sign_in_path, class: "btn btn-success btn-lg" %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to 'Sign In', new_user_session_path, class: "btn btn-success btn-lg" %>
       <% end %>
     </div>
   </div>

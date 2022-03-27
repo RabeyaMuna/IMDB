@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   def index
-    # @limit = params.dig(:user, :limit) ? params[:user][:limit] : User.default_per_page
-    # @users = sorted_index(User).accessible_by(current_ability).page(params[:page]).per(@limit)
-    @users = Book.order(created_at: desc)
+    if params[:category].present?
+      @posts = Post.where(category: params[:category])
+    else
+      @posts = Post
+    end.order(created_at: :desc)
   end
 
   def create
@@ -17,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @user.update(post_params)
+    if @post.update(post_params)
       flash[:success] = I18n.t('notice.update.success', resource: Post.model_name.human)
       redirect_to posts_path
     else
@@ -27,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
+    if @post.destroy
       flash[:success] = I18n.t('notice.delete.success', resource: User.model_name.human)
     else
       flash[:error] = I18n.t('notice.delete.fail', resource: User.model_name.human)
@@ -38,6 +40,14 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :email, :password, :phone, :role, :avatar)
+    params.require(:post).permit(
+      :user_id,
+      :name,
+      :category,
+      :description,
+      :release_date,
+      :link,
+      cast_crews_attributes: %i(id :name :cast_type _destroy),
+    ).merge({ user_id: current_user.id })
   end
 end

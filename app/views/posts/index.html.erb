@@ -1,0 +1,30 @@
+<div class="container my-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="view-h1"></h1>
+      <table class="table table-hover">
+        <tbody>
+          <% @posts.all.each do |post| %>
+            <tr>
+              <td>
+                <div class="posts-index-img d-inline">
+                  <% if post.poster.attached? %>
+                    <%= image_tag(post.poster, class: "index-img") %>
+                  <% else %>
+                    <%= image_tag('default_book_avatar.jpeg', class: "index-img") %>
+                  <% end %>
+                </div>
+              </td>
+              <td><%= link_to post.name, post, class: "btn btn-link btn-sm" %></td>
+              <td><%= post.created_at.strftime("%d-%m-%Y") %></td>
+              <td> <%= link_to 'Update',
+                                edit_post_path(post),
+                                class: "btn btn-secondary btn-sm" %> 
+              </td>
+            <% end %>
+         </tbody>
+      </table>
+      <br/>
+    </div>
+  </div>
+</div>

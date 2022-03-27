@@ -3,11 +3,11 @@ class CreatePosts < ActiveRecord::Migration[7.0]
     create_table :posts do |t|
       t.citext :name, index: true, null: false
       t.integer :category, index: true, default: 1, null: false
-      t.integer :cast_crew, array: true, default: []
       t.text :description
       t.string :link
       t.string :release_date, null: false
-      t.references :user, foreign_key: true, null: false, index: true
+      t.float :score
+      t.references :user, foreign_key: true, index: true
 
       t.timestamps
     end
