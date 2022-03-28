@@ -9,11 +9,9 @@ Rails.application.routes.draw do
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'home#index'
-  resources :posts
-  # resources :users
-  #   resources :posts do
-  #     resources :comments
-  #     resources :post_reports
-  #     resources :reports
-  #   end
+  resources :posts do
+      resources :post_ratings
+      resources :comments
+      resources :post_reports
+  end
 end
