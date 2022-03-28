@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You got a post report from <%= @post_report.user.name %> against the post <%= @post_report.post %> </p>
+    <p>
+    Reason<br>
+    --------------------------
+    </p>
+    <p><%= @post_report.comment %></p>
+  </body>
+</html>

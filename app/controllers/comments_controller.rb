@@ -5,7 +5,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = PostRating.new(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(comment_params)
+    if @comment.save
+      render :show
+    else
+      render json: @comment.errors.full_messages, status: 422
+    end
+  end
+
+  def show
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.where(user_id: current_user.id)
     if @comment.save
       render :show
     else
