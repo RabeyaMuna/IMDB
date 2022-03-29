@@ -15,12 +15,7 @@
                   <% end %>
                 </div>
               </td>
-              <td><%= link_to post.name, post, class: "btn btn-link btn-sm" %></td>
-              <td><%= post.created_at.strftime("%d-%m-%Y") %></td>
-              <td> <%= link_to 'Update',
-                                edit_post_path(post),
-                                class: "btn btn-secondary btn-sm" %> 
-              </td>
+              <td><%= link_to post.name, post_path(post), class: "btn btn-link btn-sm" %></td>
             <% end %>
          </tbody>
       </table>

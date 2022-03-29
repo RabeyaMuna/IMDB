@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :posts
   has_many :post_ratings
-  has_many :comments, through: :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :post_reports, through: :posts
   has_many :reports, through: :comments, dependent: :destroy
 

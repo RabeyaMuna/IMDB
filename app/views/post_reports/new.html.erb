@@ -1,0 +1,12 @@
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+    <%= form_with(model: [@post, @post.post_reports.build]) do |f| %>
+      <div class="form-group">
+        <%= f.text_area :message, placeholder: 'New comment', require: true, class: 'form-control' %>
+      </div><br>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+   </div> 
+ </div>
+</div>

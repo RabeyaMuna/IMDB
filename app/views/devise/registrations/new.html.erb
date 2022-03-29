@@ -1,5 +1,7 @@
-
-<h2>Sign up</h2>
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+      <h2>Sign up</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -23,8 +25,10 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Sign up", class: "btn-success mt-3" %>
   </div>
 <% end %>
+ </div>
+  </div>
+</div>
 
-<%= render "devise/shared/links" %>

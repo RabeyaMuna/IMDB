@@ -4,11 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>You got a post report from <%= @post_report.user.name %> against the post <%= @post_report.post %> </p>
+    <p>You got a post report from <%= @post_reporter_name %> against the post <%= @post_url %> </p>
     <p>
     Reason<br>
     --------------------------
     </p>
-    <p><%= @post_report.comment %></p>
+    <p><%= @reason %></p>
+    <p> Please visit the link: <%= @post_url %> </p>
   </body>
 </html>

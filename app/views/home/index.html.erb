@@ -1,5 +1,4 @@
-<%= render 'home_cards', post_list: @recent_released, title: 'Recent Released' %>
+<%= link_to 'Top Rated', posts_path, class: "index-link"%> 
 <%= render 'home_cards', post_list: @latest_collection, title: 'Latest Collections' %>
-<%= render 'home_cards', post_list: @movie_collection, title: 'Movies' %>
-<%= render 'home_cards', post_list: @music_video_collection, title: 'Music Video' %>
-<%= render 'home_cards', post_list: @short_film_collection, title: 'Short Videos' %>
+<%= link_to 'Recent Released', posts_path, class: "index-link"%> 
+<%= render 'home_cards', post_list: @recent_released, title: 'Recent Released' %>

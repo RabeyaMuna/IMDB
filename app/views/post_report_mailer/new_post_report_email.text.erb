@@ -1,8 +1,10 @@
-You got a new report from <%= @post_report.user.name %>!
+You got a new report from <%= @post_reporter_name %>! against a movie content.
 ===============================================
 
 Report Details:
 --------------------------
 
 Message:
-<%= @post_report.message %>
+<%=  @reason  %>
+
+Please visit the link: <%= @post_url %>

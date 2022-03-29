@@ -1,12 +1,31 @@
-<div class="card my-1"> # place this card blow the post body.
-  <div class="card-body">
-    <p class="font-weight-bold">Comments</p>
-    <%= form_with(model: [@post, @post.comments.build]) do |f| %>
-      <div class="form-group">
-        <%= f.label 'New comment' %>
-        <%= f.text_area :comment, class: 'form-control' %>
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+      <% if @post.trailer.attached? %>
+        <%= video_tag(url(@post.trailer)) %>
+      <% end %>
+       <h1><%= @post.name %></h1>
+       <p>Rating <%= @post.score%></p>
+       <p>Release Date <%= @post.release_date%></p>
+       <h3>Story Line</h3>
+       <p><%= @post.description %></p>
+      <div>
       </div>
-      <%= f.submit 'Submit', class: 'btn btn-primary' %>
-    <% end %>
+      <%= link_to 'Edit', edit_post_path(@post) %> |
+      <%= link_to 'Back', posts_path %> | 
+      <%= link_to 'Report', new_post_post_report_path(@post) %>
+    </div>
   </div>
+  <h1>Related Images </h1>
+  
+
+<h1>Comment</h1>
+
+<div class="container">
+  <%= render 'comments/form', post: @post %>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', post: @post, comment: comment %>
+  <% end %>
 </div>
+
+

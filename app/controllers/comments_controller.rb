@@ -1,47 +1,33 @@
 class CommentsController < ApplicationController
-  def index
-    @comments = Comment.all.where(post_id: params[:id])
-    render :index
-  end
+  before_action :authenticate_user!
+  before_action :find_post
 
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
-    if @comment.save
-      render :show
-    else
-      render json: @comment.errors.full_messages, status: 422
-    end
-  end
-
-  def show
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.where(user_id: current_user.id)
-    if @comment.save
-      render :show
-    else
-      render json: @comment.errors.full_messages, status: 422
-    end
+    @comment.save
+    redirect_to post_path(@post)
   end
 
   def update
-    @comment = Comment.find_by(post_id: params[:post_id], user_id: current_user.id)
-    if @comment.update(comment_params)
-      render :show
-    else
-      render json: @comment.errors.full_messages, status: 422
-    end
+    @comment = @post.comments.find(params[:id])
+    @comment.update!(comment_params)
+    post_path(@post)
   end
 
   def destroy
-    @comment = Comment.find_by(post_id: params[:post_id], user_id: current_user.id)
+    @comment = @post.comments.find(params[:id])
     @comment.destroy!
-    redirect_to root_path 
+
+    redirect_to post_path(@post) 
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:post_id, :user_id, :comment)
+    params.require(:comment).permit(:comment).merge(user_id: current_user.id)
+  end
+
+  def find_post
+    @post = Post.find(params[:post_id])
   end
 end

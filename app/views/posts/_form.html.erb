@@ -1,0 +1,12 @@
+<%= simple_form_for post do |f| %>
+  <%= f.input :name,  required: true%>
+  <%= f.input :release_date, as: :date, html5: true %>
+  <%= f.input :description%>
+  <br>
+  <%= f.label :poster, 'Upload Poster'%>
+  <%= f.file_field :poster, required: true, accept: ContentType::IMAGE_TYPE %>
+  <br>
+  <%= f.label :trailer, 'Upload Movie Tariler'%>
+  <%= f.file_field :trailer, required: true, accept: ContentType::VIDEO_TYPE %>
+  <%= f.button :submit, class: "btn-success mt-3" %>
+<% end %>

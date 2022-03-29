@@ -1,11 +1,19 @@
 class PostsController < ApplicationController
-  def index
-    if params[:category].present?
-      @posts = Post.where(category: params[:category])
-    else
-      @posts = Post
-    end.order(created_at: :desc)
+  before_action :find_post, only: %i(edit show update destroy)
+
+  def new
+    @post = Post.new
   end
+
+  def index
+     @posts = Post.order(created_at: :desc)
+  end
+
+  def show
+    @post = Post.find_by(id: params[:id])
+    @comments = @post.comments.order(created_at: :desc)
+  end
+
 
   def create
     @post = Post.new(post_params)
@@ -20,10 +28,8 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:success] = I18n.t('notice.update.success', resource: Post.model_name.human)
       redirect_to posts_path
     else
-      flash[:error] = I18n.t('notice.update.fail', resource: Post.model_name.human)
       render :edit
     end
   end
@@ -37,6 +43,11 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def show_comment
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
+    render :index
+  end
+
   private
 
   def post_params
@@ -47,7 +58,13 @@ class PostsController < ApplicationController
       :description,
       :release_date,
       :link,
+      :trailer,
+      images:[],
       cast_crews_attributes: %i(id :name :cast_type _destroy),
     ).merge({ user_id: current_user.id })
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
   end
 end

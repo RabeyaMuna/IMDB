@@ -84,27 +84,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_155226) do
 
   create_table "posts", force: :cascade do |t|
     t.citext "name", null: false
-    t.integer "category", default: 1, null: false
     t.text "description"
     t.string "link"
-    t.string "release_date", null: false
+    t.date "release_date", null: false
+    t.float "score"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category"], name: "index_posts_on_category"
     t.index ["name"], name: "index_posts_on_name"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.text "body"
-    t.bigint "comment_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["comment_id", "user_id"], name: "index_reports_on_comment_id_and_user_id", unique: true
-    t.index ["comment_id"], name: "index_reports_on_comment_id"
-    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -134,6 +122,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_155226) do
   add_foreign_key "post_reports", "posts"
   add_foreign_key "post_reports", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "reports", "comments"
-  add_foreign_key "reports", "users"
 end
