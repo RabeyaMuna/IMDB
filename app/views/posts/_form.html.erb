@@ -8,5 +8,12 @@
   <br>
   <%= f.label :trailer, 'Upload Movie Tariler'%>
   <%= f.file_field :trailer, required: true, accept: ContentType::VIDEO_TYPE %>
+  <%= f.fields_for :cast_crews do |cast_crew| %>
+    <%= render "cast_crew_fields", f: cast_crew %>
+  <% end %>
+  <div class="links">
+
+    <%= link_to_add_association "ADD", f, :cast_crews %>
+   </div>
   <%= f.button :submit, class: "btn-success mt-3" %>
 <% end %>

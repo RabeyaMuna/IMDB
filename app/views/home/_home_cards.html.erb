@@ -2,9 +2,15 @@
     <% post_list.each do |post| %> 
       <div class="post__card">
         <div class="post__content">
+           <div class="posts-index-img d-inline">
+            <% if post.poster.attached? %>
+              <%= image_tag(post.poster, class: "index-img") %>
+            <% else %>
+              <%= image_tag('default_book_avatar.jpeg', class: "index-img") %>
+            <% end %>
+          </div>
           <h5 class="post__name">Name <%= post.name %></h5>
-          <h6 class="post__release_date">Released Date<%= post.release_date %></h6>
-          <h6 class="post__link"> <%= post.link %></h6>
+          <h6 class="post__release_date">Released Date: <%= post.release_date %></h6>
           <%= link_to 'Details', post_path(post), class: "post__link" %>
         </div>
       </div>

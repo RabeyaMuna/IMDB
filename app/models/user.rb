@@ -12,8 +12,7 @@ class User < ApplicationRecord
   has_many :post_ratings
   has_many :comments, dependent: :destroy
   has_many :post_reports, through: :posts
-  has_many :reports, through: :comments, dependent: :destroy
-
+ 
   ROLES = { admin: 0, verified_user: 1, user: 2 }.freeze
   enum role: ROLES
 

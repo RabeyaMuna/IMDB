@@ -9,7 +9,6 @@ RSpec.describe Comment, type: :model do
     end
 
   describe 'associations' do
-    it { is_expected.to have_many(:reports)}
     it { is_expected.to belong_to(:post) }
     it { is_expected.to belong_to(:user) }
   end

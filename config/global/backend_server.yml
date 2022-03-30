@@ -1,0 +1,7 @@
+default:
+  base_url: <%= ENV.fetch('IMDB_BACKEND_PATH', 'http://localhost:3000') %>
+
+development:
+test:
+staging:
+production:

@@ -1,3 +1,0 @@
-class CastCrewsController < ApplicationController
-    
-end

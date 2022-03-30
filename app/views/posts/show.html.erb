@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <% if @post.trailer.attached? %>
-        <%= video_tag(url(@post.trailer)) %>
+        <%= video_tag(url_for(@post.trailer), style: 'width: 80%', controls: true) %>
       <% end %>
        <h1><%= @post.name %></h1>
        <p>Rating <%= @post.score%></p>
@@ -17,7 +17,9 @@
     </div>
   </div>
   <h1>Related Images </h1>
-  
+    <% if @post.poster.attached? %>
+      <%= image_tag(url_for(@post.poster), class: "index-img") %>
+    <% end%>
 
 <h1>Comment</h1>
 

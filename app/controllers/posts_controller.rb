@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i(edit show update destroy)
 
   def new
-    @post = Post.new
+    @post = Post.new 
+    @cast_crew = @post.cast_crews.build 
   end
 
   def index
@@ -10,10 +11,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
     @comments = @post.comments.order(created_at: :desc)
   end
-
 
   def create
     @post = Post.new(post_params)
@@ -52,15 +51,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :user_id,
       :name,
-      :category,
       :description,
       :release_date,
       :link,
       :trailer,
-      images:[],
-      cast_crews_attributes: %i(id :name :cast_type _destroy),
+      :poster,
+      images:[]
     ).merge({ user_id: current_user.id })
   end
 

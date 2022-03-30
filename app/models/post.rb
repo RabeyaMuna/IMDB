@@ -3,9 +3,9 @@ class Post < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   has_one_attached :poster
-  has_many :comments, dependent: :destroy
-  has_many :post_ratings, through: :users
-  has_many :post_reports, dependent: :destroy
+  has_many :comments
+  has_many :post_ratings
+  has_many :post_reports
   has_many :cast_crews, dependent: :destroy
 
   has_many_attached :images, dependent: :destroy
@@ -26,12 +26,11 @@ class Post < ApplicationRecord
               message: "formats supported are #{VIDEO_TYPE.join(', ')}."
             },
             size: { less_than_or_equal_to: 500.megabytes, message: 'must be within 500MB in size' }
+  after_create :generate_post_url
 
-  private 
+  private
 
   def generate_post_url
-    byebug
-    self.link = post_path(self)
-    self.save
+    update_attribute(:link, "#{Global.backend_server.base_url}/#{post_path(self)}")
   end
 end

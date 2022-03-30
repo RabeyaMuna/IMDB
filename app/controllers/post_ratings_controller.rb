@@ -1,16 +1,9 @@
 class PostRatingsController < ApplicationController
-  def index
-    @post_ratings = PostRating.all.where(post_id: params[:id])
-    render :index
-  end
+  before_action :find_post
 
   def create
-    @post_rating = PostRating.new(post_rating_params)
-    if @post_rating.save
-      render :show
-    else
-      render json: @post_rating.errors.full_messages, status: 422
-    end
+    check_user_post_rating
+    @post_rating.save
   end
 
   def update
@@ -25,6 +18,19 @@ class PostRatingsController < ApplicationController
   private
 
   def post_rating_params
-    params.require(:post_rating).permit(:rating, :post_id, :user_id)
+    params.require(:post_rating).permit(:rating, :post_id).merge(user_id: current_user.id)
+  end
+
+  def check_user_post_rating
+    exsisting_post_rating = @post.post_ratings.find_by(user_id: current_user.id, id: params[:id])
+    if check_user_rating_exsistence.present?
+      exsisting_post_rating.assign_attributes(post_rating_params)
+    else 
+      @post_rating = @post.new(post_rating_params)
+    end
+  end
+
+  def find_post
+    @post = Post.find_by(id: params[:post_id])
   end
 end
