@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+The remaining work-
+
+->> Exception Handaling
+->>  Rspec of some endpoints
+->> UI design
