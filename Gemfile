@@ -56,13 +56,14 @@ gem 'webpacker', '~> 5.0'
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem 'capybara'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
   gem 'bullet'
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'factory_bot_rails'
   gem 'faker'
-   gem 'letter_opener'
+  gem 'letter_opener'
   gem 'pdf-inspector', require: 'pdf/inspector'
   gem 'pry-rails'
   gem 'rspec-rails'
@@ -83,7 +84,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'

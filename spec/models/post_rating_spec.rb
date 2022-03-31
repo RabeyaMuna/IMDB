@@ -15,6 +15,6 @@ RSpec.describe PostRating, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:rating) }
-    it { is_expected.to validate_inclusion_of(:rating).in_range(1..5) }
+    it { is_expected.to validate_inclusion_of(:rating).in_range(0..5) }
   end
 end

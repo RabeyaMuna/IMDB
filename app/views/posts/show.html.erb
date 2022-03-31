@@ -17,8 +17,9 @@
        <p><%= @post.description %></p>
       <div>
       </div>
-      <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %> |
-      <%= link_to 'Back', posts_path, class: "btn btn-secondary" %> | 
+      <% if current_user.id == @post.user_id %>
+        <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %> |
+      <% end %>
       <%= link_to 'Report', new_post_post_report_path(@post), class: "btn btn-danger" %>
     </div>
   </div>

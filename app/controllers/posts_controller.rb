@@ -19,10 +19,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash[:success] = I18n.t('notice.create.success', resource: Post.model_name.human)
       redirect_to root_path
     else
-      flash[:error] = I18n.t('notice.create.fail', resource: Post.model_name.human)
       render :new
     end
   end
@@ -37,11 +35,10 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.destroy!
-      flash[:success] = I18n.t('notice.delete.success', resource: User.model_name.human)
+      redirect_to posts_path
     else
-      flash[:error] = I18n.t('notice.delete.fail', resource: User.model_name.human)
+      redirect_to root_path
     end
-    redirect_to posts_path
   end
 
   def show_comment
@@ -67,6 +64,6 @@ class PostsController < ApplicationController
   end
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]) 
   end
 end

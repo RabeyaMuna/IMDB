@@ -61,3 +61,42 @@
   vertical-align: middle;
 }
 
+.post{
+  color: $white;
+  margin-left: 3.125rem;
+  margin-right: 3.125rem;
+  border-style: double;
+
+  &__cards {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    background-color: $white;
+  }
+
+  &__cards::-webkit-scrollbar-button {
+    display: block;
+  }
+
+  &__img {
+    display: block;
+    height: 9.375rem;
+    width: 9.375rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__name {
+    padding: 0.313rem 0.313rem 0 0.313rem;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+  }
+
+  &__content {
+    width: 12.5rem;
+    height: 13.125rem;
+    text-align: center;
+  }
+}

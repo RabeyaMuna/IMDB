@@ -1,20 +1,18 @@
-
+<div class="post">
+  <div class="post__cards">
     <% post_list.each do |post| %> 
-      <div class="card" style="width: 18rem;">
+      <div style= " border-style: solid; margin-right: 1.25rem; height: 21.875rem; background-color: $light-blue;">
         <% if post.poster.attached? %>
-          <%= image_tag(post.poster, class: "card-img-top", alt: "Card image cap") %>
+          <%= image_tag(post.poster, class: "post__img") %>
         <% else %>
-          <%= image_tag('default_book_avatar.jpeg', class: "index-img") %>
+          <%= image_tag('default_user_avatar.jpeg', class: "post__img") %>
         <% end %>
-        <div class="card-body">
-          <h5 class="card-title">post.name</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><%= post.score %></li>
-          <li class="list-group-item"><%= post.release_date %></li>
-        </ul>
-        <div class="card-body">
-          <%= link_to 'DETAIL', post_path(post) %>
+        <div class="post_content">
+          <h5 class="post__name"><%= post.name %></h5>
+          <h5 class="text-warning">Rating: <%= post.score %></h5>
+          <%= link_to 'DETAIL', post_path(post), class: "btn btn-info"%>
         </div>
       </div>
     <% end %>
+  </div>
+</div>
