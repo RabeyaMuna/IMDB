@@ -1,16 +1,18 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
+
   before_action :find_post, only: %i(edit show update destroy)
 
   def new
-    @post = Post.new 
-    @cast_crew = @post.cast_crews.build 
+    @post = Post.new
   end
 
   def index
-     @posts = Post.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc)
   end
 
   def show
+    @post = Post.with_attached_images.find(params[:id])
     @comments = @post.comments.order(created_at: :desc)
   end
 
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       flash[:success] = I18n.t('notice.create.success', resource: Post.model_name.human)
-      redirect_to posts_path
+      redirect_to root_path
     else
       flash[:error] = I18n.t('notice.create.fail', resource: Post.model_name.human)
       render :new
@@ -34,7 +36,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.destroy
+    if @post.destroy!
       flash[:success] = I18n.t('notice.delete.success', resource: User.model_name.human)
     else
       flash[:error] = I18n.t('notice.delete.fail', resource: User.model_name.human)
@@ -57,7 +59,10 @@ class PostsController < ApplicationController
       :link,
       :trailer,
       :poster,
-      images:[]
+      :director_name,
+      :producer_name,
+      :cast_name,
+      images: [],
     ).merge({ user_id: current_user.id })
   end
 

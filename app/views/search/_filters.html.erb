@@ -1,0 +1,8 @@
+
+<div class="card-body">
+<%= search_form_for @q, url: search_with_gem_path do |f| %>
+    <%= f.search_field :name_or_director_name_or_producer_name_or_cast_name_cont, placeholder: 'Search...', size: 10 %>
+    <%= f.button 'Search' %>
+<% end %>
+</div>
+

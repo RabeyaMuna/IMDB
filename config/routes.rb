@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'home#index'
   resources :posts do
-      resources :post_ratings
-      resources :comments
-      resources :post_reports
+    resources :post_ratings, only: [:create]
+    resources :comments
+    resources :post_reports, only: [:new, :index, :create, :destroy]
   end
+
+  get :search_with_gem, to: 'search#search_with_gem', as: :search_with_gem
 end

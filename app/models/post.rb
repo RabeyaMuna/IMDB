@@ -2,18 +2,15 @@ class Post < ApplicationRecord
   include ContentType
   include Rails.application.routes.url_helpers
 
-  has_one_attached :poster
-  has_many :comments
-  has_many :post_ratings
-  has_many :post_reports
-  has_many :cast_crews, dependent: :destroy
+  has_one_attached :poster, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :post_ratings, dependent: :destroy
+  has_many :post_reports, dependent: :destroy
 
   has_many_attached :images, dependent: :destroy
   has_one_attached :trailer, dependent: :destroy
 
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
-
-  accepts_nested_attributes_for :cast_crews, allow_destroy: true, reject_if: :all_blank
 
   validates :name, :release_date, presence: true
   validates :poster,
@@ -28,9 +25,21 @@ class Post < ApplicationRecord
             size: { less_than_or_equal_to: 500.megabytes, message: 'must be within 500MB in size' }
   after_create :generate_post_url
 
+  before_save :calculate_average_rating
+
   private
 
   def generate_post_url
     update_attribute(:link, "#{Global.backend_server.base_url}/#{post_path(self)}")
+  end
+
+  def blank_star
+    5 - rating.to_i
+  end
+
+  def calculate_average_rating
+    if  self.post_ratings.present?
+      self.score = self.post_ratings.sum(:rating)/self.post_ratings.count
+    end
   end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+ 
     def index
         @users = User.order(created_at: asc)
       end
@@ -20,15 +20,12 @@ class UsersController < ApplicationController
       end
     
       def update
-        if @user.update(user_params)
-          redirect_to user_path
-        end
+        redirect_to user_path if @user.update(user_params)
       end
     
       def destroy
-        if @user.destroy!
-            redirect_to root_path
-        end
+        @user.destroy!
+        redirect_to root_path
       end
     
       private

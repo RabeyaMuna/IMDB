@@ -1,0 +1,37 @@
+<div class="container my-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="view-h1"></h1>
+       <table class="table table-hover">
+       <%= link_to 'Back',  posts_path %>
+          <thead>
+          <h1>Report List</h1>
+            <tr>
+              <th scope="col">Movie Nam</th>
+              <th scope="col">Reporter</th>
+              <th scope="col">URL</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+        <tbody>
+
+          <% @post.post_reports.all.each do |post_report| %>
+            <tr>
+              <td><%= @post.name %></td>
+              <td>
+              <%= link_to @post.user.name,  user_path( @post.user.name) %>
+              </td>
+              <td><%= @post.link %></td>
+              <td><%= post_report.message %></td>
+              <td>
+                <%= button_to 'Delete',  post_post_report_path(@post, post_report), method: :delete %>
+              </td>
+            <% end %>
+            </tr>
+         </tbody>
+      </table>
+      <br/>
+    </div>
+  </div>
+</div>

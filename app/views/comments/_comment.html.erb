@@ -1,6 +1,9 @@
 <div class="comment-<%= comment.id %> container"
     style="border: 1px solid black; padding: 1em; margin: 1em;">
-  <h2> <%= comment.user.name %> </h2> <br />
+  <h2> <span style="color:blue"> User: </span> 
+     <%= link_to comment.user.name, user_path(comment.user.id) %>
+   </h2>
+   <br />
   <span>Posted <%= time_ago_in_words(comment.created_at) %></span>
   <% if current_user == comment.user %>
     <div class="button-group float-end">

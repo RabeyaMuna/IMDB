@@ -3,7 +3,7 @@
     <div class="card-body">
     <%= form_with(model: [@post, @post.comments.build]) do |f| %>
       <div class="form-group">
-        <%= f.text_area :comment, placeholder: 'New comment', require: true, class: 'form-control' %>
+        <%= f.text_area :comment, placeholder: 'New comment', require: true, class: 'form-control', style: 'width: 50%; height:100%' %>
       </div><br>
       <%= f.submit 'Submit', class: 'btn btn-primary' %>
     <% end %>

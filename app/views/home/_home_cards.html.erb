@@ -1,18 +1,20 @@
- <div class="post__cards">
+
     <% post_list.each do |post| %> 
-      <div class="post__card">
-        <div class="post__content">
-           <div class="posts-index-img d-inline">
-            <% if post.poster.attached? %>
-              <%= image_tag(post.poster, class: "index-img") %>
-            <% else %>
-              <%= image_tag('default_book_avatar.jpeg', class: "index-img") %>
-            <% end %>
-          </div>
-          <h5 class="post__name">Name <%= post.name %></h5>
-          <h6 class="post__release_date">Released Date: <%= post.release_date %></h6>
-          <%= link_to 'Details', post_path(post), class: "post__link" %>
+      <div class="card" style="width: 18rem;">
+        <% if post.poster.attached? %>
+          <%= image_tag(post.poster, class: "card-img-top", alt: "Card image cap") %>
+        <% else %>
+          <%= image_tag('default_book_avatar.jpeg', class: "index-img") %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">post.name</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= post.score %></li>
+          <li class="list-group-item"><%= post.release_date %></li>
+        </ul>
+        <div class="card-body">
+          <%= link_to 'DETAIL', post_path(post) %>
         </div>
       </div>
-    <% end %> 
-  </div>
+    <% end %>

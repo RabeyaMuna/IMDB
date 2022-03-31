@@ -1,6 +1,0 @@
-<div class="nested-fields">
-    <%= f.input :name, placeholder: 'Name', required: true %>
-    <%= f.input :cast_type, as: :radio_buttons, collection: CastCrew::CastType.keys, required: true %>
-    
-    <%= link_to_remove_association "Remove", f %>
-</div>

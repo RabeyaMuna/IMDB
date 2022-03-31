@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 gem 'active_storage_validations'
 gem 'bcrypt'
-gem 'cocoon'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'global'

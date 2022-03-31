@@ -1,24 +1,32 @@
 <div class="container my-5">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body ">
+     <h1 ><%= @post.name %></h1>
       <% if @post.trailer.attached? %>
         <%= video_tag(url_for(@post.trailer), style: 'width: 80%', controls: true) %>
       <% end %>
-       <h1><%= @post.name %></h1>
-       <p>Rating <%= @post.score%></p>
-       <p>Release Date <%= @post.release_date%></p>
-       <h3>Story Line</h3>
+       <p class="text-warning">Rating <%= @post.score%>/5.0
+         <%= render 'post_ratings/form', post: @post %>
+       </p>
+       <p> <span style="color:blue">Release Date: </span> <%= @post.release_date%></p>
+        <h2>Details</h2>
+       <p><span style="color:blue">All Cast: </span><%= @post.director_name %></p>
+       <p><span style="color:blue">Director: </span><%= @post.director_name %></p>
+       <p><span style="color:blue">Producer: </span><%= @post.producer_name %></p>
+       <h3><span style="color:Red">Story Line</span></h3>
        <p><%= @post.description %></p>
       <div>
       </div>
-      <%= link_to 'Edit', edit_post_path(@post) %> |
-      <%= link_to 'Back', posts_path %> | 
-      <%= link_to 'Report', new_post_post_report_path(@post) %>
+      <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %> |
+      <%= link_to 'Back', posts_path, class: "btn btn-secondary" %> | 
+      <%= link_to 'Report', new_post_post_report_path(@post), class: "btn btn-danger" %>
     </div>
   </div>
   <h1>Related Images </h1>
-    <% if @post.poster.attached? %>
-      <%= image_tag(url_for(@post.poster), class: "index-img") %>
+    <% if @post.images.attached? %>
+      <% @post.images.each do |image| %>
+        <%= image_tag(url_for(image), class: "index-img") %>
+      <% end %>
     <% end%>
 
 <h1>Comment</h1>

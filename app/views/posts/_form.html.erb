@@ -1,19 +1,17 @@
 <%= simple_form_for post do |f| %>
   <%= f.input :name,  required: true%>
+  <%= f.input :director_name %>
+  <%= f.input :producer_name%>
+  <%= f.input :cast_name %>
   <%= f.input :release_date, as: :date, html5: true %>
   <%= f.input :description%>
+
   <br>
   <%= f.label :poster, 'Upload Poster'%>
   <%= f.file_field :poster, required: true, accept: ContentType::IMAGE_TYPE %>
   <br>
   <%= f.label :trailer, 'Upload Movie Tariler'%>
   <%= f.file_field :trailer, required: true, accept: ContentType::VIDEO_TYPE %>
-  <%= f.fields_for :cast_crews do |cast_crew| %>
-    <%= render "cast_crew_fields", f: cast_crew %>
-  <% end %>
-  <div class="links">
-
-    <%= link_to_add_association "ADD", f, :cast_crews %>
-   </div>
+  <%= f.file_field :images, multiple: true, accept: ContentType::IMAGE_TYPE %>
   <%= f.button :submit, class: "btn-success mt-3" %>
 <% end %>

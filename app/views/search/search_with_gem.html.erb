@@ -1,0 +1,28 @@
+<%= render 'filters' %>
+<div class="container my-4">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="view-h1">Search Results</h1>
+    </div>
+    <div class="card-body">
+
+      <% if @posts.nil? %>
+        <h1 class="view-h1">No match found!</h1>
+      <% else %>  
+        <table class="table table-hover">
+          <tbody>
+            <% @posts.each do |post| %>
+                <div>
+                <% if post.poster.attached? %>
+                    <%= image_tag(post.poster, class: "index-img") %>
+                <% end %>
+                 <%= link_to post.name, post, class: "index-link" %><br>
+                </div>
+            <% end %>
+          </tbody>
+        </table>
+        <% end %>
+        <br/>
+    </div>
+  </div>
+</div>

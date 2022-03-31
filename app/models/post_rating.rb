@@ -3,5 +3,5 @@ class PostRating < ApplicationRecord
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
   validates :rating, presence: true
-  validates :rating, inclusion: { in: 1..5 }
+  validates :rating, inclusion: { in: 0..5 }
 end
