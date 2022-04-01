@@ -6,14 +6,23 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
+Ruby 3.0.2
+Rails 7
 * System dependencies
+bundle install
+yarn install
+#### Create database, add migrations
 
-* Configuration
+```bash
+bundle exec rails db:create
+bundle exec rails db:migrate
+```
 
-* Database creation
+##### Run Server
 
-* Database initialization
+```bash
+bundle exec rails server
+```
 
 * How to run the test suite
 
