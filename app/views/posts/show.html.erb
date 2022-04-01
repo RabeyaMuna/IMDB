@@ -5,9 +5,11 @@
       <% if @post.trailer.attached? %>
         <%= video_tag(url_for(@post.trailer), style: 'width: 80%', controls: true) %>
       <% end %>
-       <p class="text-warning">Rating <%= @post.score%>/5.0
+       <div class="text-warning">
+         Rating <%= @post.score%>/5.0 
          <%= render 'post_ratings/form', post: @post %>
-       </p>
+         <%= link_to 'Report', new_post_post_report_path(@post), class: "btn btn-danger" %>
+       </div>
        <p> <span style="color:blue">Release Date: </span> <%= @post.release_date%></p>
         <h2>Details</h2>
        <p><span style="color:blue">All Cast: </span><%= @post.director_name %></p>
@@ -20,7 +22,6 @@
       <% if current_user.present? && current_user.id == @post.user_id %>
         <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %> |
       <% end %>
-      <%= link_to 'Report', new_post_post_report_path(@post), class: "btn btn-danger" %>
     </div>
   </div>
   <h1>Related Images </h1>

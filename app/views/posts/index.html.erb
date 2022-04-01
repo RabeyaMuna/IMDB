@@ -9,6 +9,7 @@
             <tr>
               <th scope="col">Poster</th>
               <th scope="col">Name</th>
+              <th scope="col">Reports</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -26,11 +27,15 @@
               </td>
               <td><%= post.name %></td>
               <td>
-              <p>
-                <%= link_to 'Show', post_path(post) %>
+                <% if post.post_reports.present? %>
+                  <%= button_to 'Reports', post_post_reports_path(post), method: :get %>
+                <% else %>
+                  None
+                <% end %>
+              </td>
+              <td>
+                <%= button_to 'Show', post_path(post), method: :get %>
                 <%= button_to 'Delete',  post_path(post), method: :delete %>
-                <%= button_to 'Reports', post_post_reports_path(post), method: :get %>
-                </p>
               </td>
             <% end %>
             </tr>

@@ -7,10 +7,8 @@ class UsersController < ApplicationController
       def create
         @user = User.new(user_params)
         if @user.save
-          # flash[:success] = I18n.t('notice.create.success', resource: User.model_name.human)
-          redirect_to users_path
+          redirect_to user_path
         else
-          # flash[:error] = I18n.t('notice.create.fail', resource: User.model_name.human)
           render :new
         end
       end
