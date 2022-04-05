@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
+  # post 'create_user' => 'users#create', as: :create_user   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'home#index'
   resources :posts do

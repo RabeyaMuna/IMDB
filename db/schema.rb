@@ -43,17 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "cast_crews", force: :cascade do |t|
-    t.integer "cast_type", default: 0, null: false
-    t.citext "name", null: false
-    t.bigint "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cast_type"], name: "index_cast_crews_on_cast_type"
-    t.index ["name"], name: "index_cast_crews_on_name"
-    t.index ["post_id"], name: "index_cast_crews_on_post_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.text "comment"
     t.bigint "post_id", null: false
@@ -65,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
   end
 
   create_table "post_ratings", force: :cascade do |t|
-    t.integer "rating", null: false
+    t.integer "rating", default: 0, null: false
     t.bigint "post_id", null: false
     t.bigint "user_id", null: false
     t.index ["post_id"], name: "index_post_ratings_on_post_id"
@@ -87,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
     t.text "description"
     t.string "link"
     t.date "release_date", null: false
-    t.float "score"
+    t.float "score", default: 0.0, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,7 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "cast_crews", "posts"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "post_ratings", "posts"

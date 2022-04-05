@@ -1,8 +1,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, 
+         :registerable,
+         :recoverable, 
+         :rememberable, 
+         :validatable
 
   include ContentType
   include ValidEmailRegex
@@ -16,6 +19,9 @@ class User < ApplicationRecord
   ROLES = { admin: 0, verified_user: 1, user: 2 }.freeze
   enum role: ROLES
 
+  validates :avatar,
+            content_type: IMAGE_TYPE,
+            size: { less_than_or_equal_to: 5.megabytes, message: 'must be within 5MB in size' }
   validates :email,
             presence: true,
             uniqueness: { case_sensitive: false },

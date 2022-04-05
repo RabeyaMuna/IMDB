@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.text :description
       t.string :link
       t.date :release_date, null: false
-      t.float :score
+      t.float :score, null: false, default: 0.0
       t.references :user, foreign_key: true, index: true
 
       t.timestamps
