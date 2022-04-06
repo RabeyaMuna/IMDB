@@ -12,6 +12,9 @@
   <br>
   <%= f.label :trailer, 'Upload Movie Tariler'%>
   <%= f.file_field :trailer, required: true, accept: ContentType::VIDEO_TYPE %>
+  <br>
+  <%= f.label :images, 'Upload Movie related images'%>
   <%= f.file_field :images, multiple: true, accept: ContentType::IMAGE_TYPE %>
+  <br>
   <%= f.button :submit, class: "btn-success mt-3" %>
 <% end %>

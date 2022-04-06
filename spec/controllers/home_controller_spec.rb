@@ -7,7 +7,7 @@ RSpec.describe HomeController do
 
   describe 'GET #index' do
     before { get :index }
-    
+
     it 'shows the list of top rated movies ' do
       expect(assigns(:top_rated_collection)).to eq([post_1])
     end

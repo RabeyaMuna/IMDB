@@ -2,32 +2,41 @@
   <div class="card">
     <div class="card-body">
       <h1>List of Users:</h1>
-      <% if current_user.admin %>
-        <div class="button">
-          <%= link_to('Create a New User admin', new_user_path, class: "btn btn-success float-end btn-lg") %>
-        </div>
-      <% end %>
+      <%# <div class="button">
+        <%= link_to('ADD User',  new_admin_user_path, class: "btn btn-success float-end btn-lg", method: :post) %>
+      <%# </div> %>
       <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
         <tbody>
-          <% @users.each.with_index(1) do |user, index| %>
-            <tr><td><%= calculate_serial(User, index) %></td>
+          <% @users.each do |user| %>
               <td><%= user.name %></td>
-              <td><%= user.created_at.strftime("%d-%m-%Y") %></td>
-                <%= link_to 'Show',
-                            user_path(user),
-                            class: "btn btn-primary btn-sm" %>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td>
+                    <%= link_to 'Show',
+                                admin_user_path(user),
+                                class: "btn btn-primary btn-sm" %>
 
-                <%= link_to 'Delete',
-                            user,
-                            class: "btn btn-danger btn-sm",
-                            method: :delete,
-                            data: { confirm: 'Are you sure?' } %>
-                <% end %>
+                    <%= link_to 'Update',
+                                edit_admin_user_path(user),
+                                class: "btn btn-secondary btn-sm" %>
+
+                    <%= button_to 'Delete',
+                                admin_user_path(user),
+                                class: "btn btn-danger btn-sm",
+                                method: :delete,
+                                data: { confirm: 'Are you sure?'} %>
               </td>
             </tr>
           <% end %>
         </tbody>
-      </table>
     </div>
   </div>
   <br/>

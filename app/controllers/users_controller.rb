@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, :except => :show
 
   def index
-    @users = User.order(created_at: asc)
+    @users = User.order(created_at: :asc)
   end
 
   def new
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path
+      redirect_to admin_user_path
     else
       render :new
     end
@@ -24,12 +24,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    redirect_to user_path if @user.update(user_params)
+    redirect_to admin_user_path if @user.update(user_params)
   end
 
   def destroy
     @user.destroy!
-    redirect_to root_path
+    if current_user.nil?
+      redirect_to root_path
+    else
+      redirect_to admin_users_path
+    end 
   end
 
   private
@@ -42,7 +46,7 @@ class UsersController < ApplicationController
     if current_user.admin?
       access_denied(error)
     else
-      redirect_to user_path(current_user.id)
+      redirect_to admin_user_path(current_user.id)
     end
   end
 

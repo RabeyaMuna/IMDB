@@ -1,12 +1,15 @@
-class User
+class UserPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      end
+    end
+  end
   attr_reader :user
 
   def initialize(user)
     @user = user
-  end
-
-  def index?
-    return true if user.admin
   end
 
   def update?

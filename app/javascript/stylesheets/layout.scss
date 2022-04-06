@@ -62,20 +62,35 @@
 }
 
 .post{
-  color: $white;
+  color: rgb(255, 255, 255);
   margin-left: 3.125rem;
   margin-right: 3.125rem;
   border-style: double;
+
+  &__title {
+    display: flex;
+  }
 
   &__cards {
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
-    background-color: $white;
+    background-color: rgb(255, 255, 255);
   }
 
   &__cards::-webkit-scrollbar-button {
     display: block;
+  }
+
+  &__card {
+    border-style: solid;
+    margin-right: 1.25rem;
+    height: 21.875rem;
+    background-color: #e3f2fd;
+  }
+
+  &__card:hover {
+    transform: scale(1.09);
   }
 
   &__img {
@@ -98,5 +113,28 @@
     width: 12.5rem;
     height: 13.125rem;
     text-align: center;
+  }
+
+
+  &__description {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: medium;
+    color: #00008B;
+  }
+
+  &__link {
+    background: #1145a7;
+    color: #e3f2fd;
+    text-decoration: none;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    display: inline-block;
+    margin-top: .5rem;
+
+    &:hover {
+      background: #c1e2f5;
+      font-weight: bold;
+    }
   }
 }

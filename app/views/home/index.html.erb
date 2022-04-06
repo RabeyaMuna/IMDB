@@ -1,6 +1,6 @@
-<%= link_to 'Top Rated', posts_path, class: "index-link"%> 
+<%= link_to 'Top Rated', posts_path(flag: 'rating'), class: "index-link"%> 
 <%= render 'home_cards', post_list: @top_rated_collection, title: 'Top Rated' %>
-<%= link_to 'Latest Collection', posts_path, class: "index-link"%> 
+<%= link_to 'Latest Collection', posts_path(flag: 'created_at'), class: "index-link"%> 
 <%= render 'home_cards', post_list: @latest_collection, title: 'Latest Collections' %>
-<%= link_to 'Recent Released', posts_path, class: "index-link"%> 
+<%= link_to 'Recent Released', posts_path(flag: 'relesed_date'), class: "index-link"%> 
 <%= render 'home_cards', post_list: @recent_released, title: 'Recent Released' %>

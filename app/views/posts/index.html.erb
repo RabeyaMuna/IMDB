@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <h1 class="view-h1"></h1>
-      <%= link_to '+ user', new_user_path, method: :post %>
+      <%= link_to 'User List ', admin_users_path, class: "btn btn-primary" %>
        <table class="table table-hover">
        <h1> Movie List </h1>
           <thead>
@@ -14,6 +14,7 @@
             </tr>
           </thead>
         <tbody>
+        <%  if @posts.present? %>
           <% @posts.all.each do |post| %>
             <tr>
               <td>
@@ -37,7 +38,8 @@
                 <%= button_to 'Show', post_path(post), method: :get %>
                 <%= button_to 'Delete',  post_path(post), method: :delete %>
               </td>
-            <% end %>
+          <% end %>
+        <% end %>
             </tr>
          </tbody>
       </table>

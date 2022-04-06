@@ -21,6 +21,7 @@
       </div>
       <% if current_user.present? && current_user.id == @post.user_id %>
         <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-primary" %> |
+        <%= button_to 'Delete', post_path(@post), class: "btn btn-danger", method: :delete %>
       <% end %>
     </div>
   </div>

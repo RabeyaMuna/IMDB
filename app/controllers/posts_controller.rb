@@ -6,15 +6,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def index
-    @posts = Post.order(created_at: :desc)
-  end
-
-  def show
-    @post = Post.with_attached_images.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc)
-  end
-
   def create
     @post = Post.new(post_params)
     if @post.save
@@ -22,6 +13,21 @@ class PostsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def index
+    @posts = if params[:flag] == 'rating'
+              Post.where("score > 3")
+            elsif params[:flag] == 'relesed_date'
+              Post.order(release_date: :desc)
+            else
+              Post.order(created_at: :desc)
+            end
+  end
+
+  def show
+    @post = Post.with_attached_images.find(params[:id])
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   def update
