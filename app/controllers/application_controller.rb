@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit::Authorization
+  include Pundit
   before_action :update_allowed_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

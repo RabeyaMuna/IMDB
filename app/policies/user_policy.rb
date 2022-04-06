@@ -1,15 +1,13 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope.all
-      end
+      scope.all
     end
   end
   attr_reader :user
 
-  def initialize(user)
-    @user = user
+  def index?
+    user.admin?
   end
 
   def update?
@@ -17,6 +15,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return true if user.present? && (user.admin || current_user )
+    return true if user.present? && (user.admin? || user == current_user )
   end
 end

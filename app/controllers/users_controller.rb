@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order(created_at: :asc)
+    authorize @users
   end
 
   def new
@@ -28,7 +29,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize @user
+    
     @user.destroy!
+
     if current_user.nil?
       redirect_to root_path
     else
