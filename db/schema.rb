@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_051710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -53,6 +53,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "movie_members_names", force: :cascade do |t|
+    t.integer "responsible_role", null: false
+    t.string "posts", null: false
+    t.string "cast_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "post_id", null: false
+    t.index ["cast_name"], name: "index_movie_members_names_on_cast_name"
+    t.index ["post_id"], name: "index_movie_members_names_on_post_id"
+    t.index ["posts"], name: "index_movie_members_names_on_posts"
+  end
+
   create_table "post_ratings", force: :cascade do |t|
     t.integer "rating", default: 0, null: false
     t.bigint "post_id", null: false
@@ -72,7 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.citext "name", null: false
+    t.citext "post_tittle", null: false
     t.text "description"
     t.string "link"
     t.date "release_date", null: false
@@ -80,10 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "director_name"
-    t.string "producer_name"
-    t.string "cast_name"
-    t.index ["name"], name: "index_posts_on_name"
+    t.index ["post_tittle"], name: "index_posts_on_post_tittle"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -108,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_141113) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "movie_members_names", "posts"
   add_foreign_key "post_ratings", "posts"
   add_foreign_key "post_ratings", "users"
   add_foreign_key "post_reports", "posts"

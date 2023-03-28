@@ -1,4 +1,5 @@
-class PostsController < ApplicationController
+class Api::V1::PostsController < ApplicationController
+  
   before_action :authenticate_user!, except: [:show, :index]
   before_action :find_post, only: %i(edit show update destroy)
 

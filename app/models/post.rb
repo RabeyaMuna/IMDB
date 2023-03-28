@@ -6,13 +6,15 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :post_ratings, dependent: :destroy
   has_many :post_reports, dependent: :destroy
+  has_many :movie_members_names, dependent: :destroy
+  accepts_nested_attributes_for :movie_members_names
 
   has_many_attached :images, dependent: :destroy
   has_one_attached :trailer, dependent: :destroy
 
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
-  validates :name, :release_date, presence: true
+  validates :post_tittle, :release_date, presence: true
   validates :poster,
             content_type: IMAGE_TYPE,
             size: { less_than_or_equal_to: 5.megabytes, message: 'must be within 5MB in size' }
