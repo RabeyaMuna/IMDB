@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, :except => :show

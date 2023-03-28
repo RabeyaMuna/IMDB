@@ -1,4 +1,5 @@
-class PostReportsController < ApplicationController
+class Api::V1::PostReportsController < ApplicationController
+  
   before_action :authenticate_user!
   before_action :find_post
   
